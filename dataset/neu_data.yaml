@@ -1,0 +1,11 @@
+# dataset path
+path: dataset/processed/NEU
+train: images/train
+val: images/val
+test: images/test
+
+# number of classes
+nc: 6
+
+# class names (must match label class IDs: 0=crazing, 1=inclusion, ...)
+names: ['crazing', 'inclusion', 'patches', 'pitted_surface', 'rolled-in_scale', 'scratches']

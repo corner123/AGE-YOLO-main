@@ -1,0 +1,47 @@
+# AGE-YOLO: Accurate, Generalized, and Efficient YOLO
+# Model configuration for industrial defect detection
+
+# Parameters
+nc: 10 # 类别数
+scales:
+  n: [0.50, 0.25, 1024]
+
+# Backbone
+backbone:
+  # [from, repeats, module, args]
+  - [-1, 1, Conv, [64, 3, 2]] # 0-P1/2
+  - [-1, 1, Conv, [128, 3, 2]] # 1-P2/4
+  - [-1, 2, C3k2, [256, False, 0.25]]
+  - [-1, 1, Conv, [256, 3, 2]] # 3-P3/8
+  - [-1, 2, C3k2, [512, False, 0.25]]
+  - [-1, 1, Conv, [512, 3, 2]] # 5-P4/16
+
+  # FC-MANet 模块
+  - [-1, 2, FC_MANet, [512, True, 2, 3]] # 6
+  - [-1, 1, Conv, [1024, 3, 2]] # 7-P5/32
+  - [-1, 2, FC_MANet, [1024, True, 2, 3]] # 8
+
+  - [-1, 1, SPPF, [1024, 5]] # 9
+  - [-1, 2, C2PSA, [1024]] # 10
+
+# Neck + Head
+head:
+  - [-1, 1, nn.Upsample, [None, 2, "nearest"]]
+  # ACF 混合特征
+  - [[-1, 6], 1, ACF_Module, [1]] # 融合 backbone P4
+  - [-1, 2, FC_MANet, [512, False, 2, 3]] # 13
+
+  - [-1, 1, nn.Upsample, [None, 2, "nearest"]]
+  - [[-1, 4], 1, ACF_Module, [1]] # 融合 backbone P3
+  - [-1, 2, FC_MANet, [256, False, 2, 3]] # 16 (P3/8)
+
+  - [-1, 1, Conv, [256, 3, 2]]
+  - [[-1, 13], 1, ACF_Module, [1]] # 融合 head P4
+  - [-1, 2, FC_MANet, [512, False, 2, 3]] # 19 (P4/16)
+
+  - [-1, 1, Conv, [512, 3, 2]]
+  - [[-1, 10], 1, ACF_Module, [1]] # 融合 head P5
+  - [-1, 2, FC_MANet, [1024, False, 2, 3]] # 22 (P5/32)
+
+  # 最终输出 SIFHead
+  - [[16, 19, 22], 1, SIFHead, [nc, 256]] # Detect(P3, P4, P5)

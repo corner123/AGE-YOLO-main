@@ -1,0 +1,18 @@
+# AGE-YOLO: Steel Surface Defect Detection Requirements
+# Usage: pip install -r requirements.txt
+
+
+torch>=1.8.0
+torchvision>=0.9.0
+numpy>=1.23.0
+opencv-python>=4.6.0
+matplotlib>=3.3.0
+PyYAML>=5.3.1
+scipy>=1.4.1
+tqdm>=4.64.0
+psutil
+pandas>=1.1.4
+seaborn>=0.11.0
+ultralytics>=8.3.0
+timm>=0.9.0
+einops

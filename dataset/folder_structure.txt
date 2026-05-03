@@ -1,0 +1,25 @@
+dataset
+├── README.md
+├── folder_structure.txt
+├── gc10.yaml
+├── proceeded
+│   └── GC10
+│       ├── images
+│       │   ├── test
+│       │   │   └── .gitkeep
+│       │   ├── train
+│       │   │   └── .gitkeep
+│       │   └── val
+│       │       └── .gitkeep
+│       └── labels
+│           ├── test
+│           │   └── .gitkeep
+│           ├── test.cache
+│           ├── train
+│           │   └── .gitkeep
+│           └── val
+│               └── .gitkeep
+├── raw
+│   └── .gitkeep
+├── showeverything.py
+└── testlist_gc10.txt

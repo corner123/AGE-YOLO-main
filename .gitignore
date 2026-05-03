@@ -1,0 +1,74 @@
+# ==============================================================================
+# AGE-YOLO: Steel Surface Defect Detection Project Git Ignore
+# ==============================================================================
+
+# Python Core
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+develop-eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Deep Learning Frameworks & Logs
+runs/           
+wandb/          
+logs/
+.DS_Store       
+*.log
+.pytest_cache/
+.coverage
+.cache
+
+# Datasets
+dataset/processed/**/images/*
+dataset/processed/**/labels/*
+dataset/raw/
+*.cache        
+
+
+!dataset/**/README.md
+!dataset/**/.gitkeep
+
+# Neural Network Weights
+
+*.weights
+*.pt
+*.pb
+*.onnx
+*.engine
+*.mlmodel
+*.mlpackage
+*.torchscript
+*.tflite
+*.h5
+*_saved_model/
+*_web_model/
+*_openvino_model/
+*_paddle_model/
+
+
+!weights/age_yolo_gc10.pt
+!weights/age_yolo_neu.pt
+!weights/age_yolo_pcb.pt
+
+
+# Environments and IDEs
+.env
+.venv/          
+.idea/          
+.vscode/        
+env/
+venv/

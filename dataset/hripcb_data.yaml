@@ -1,0 +1,11 @@
+# dataset path
+path: .
+train: images/train
+val: images/val
+test: images/test
+
+# number of classes
+nc: 6
+
+# class names
+names: ['missing_hole','mouse_bite', 'open_circuit', 'short', 'spur', 'spurious_copper']

@@ -1,0 +1,10 @@
+names:
+- crazing
+- inclusion
+- patches
+- pitted_surface
+- rolled-in_scale
+- scratches
+nc: 6
+train: D:\Deep_learning\Data\NEU-DET\train\images
+val: D:\Deep_learning\Data\NEU-DET\validation\images
