@@ -6,5 +6,5 @@ names:
 - rolled-in_scale
 - scratches
 nc: 6
-train: D:\Deep_learning\Data\NEU-DET\train\images
-val: D:\Deep_learning\Data\NEU-DET\validation\images
+train: /root/autodl-tmp/AGE-YOLO-main/dataset/NEU-DET/train/images
+val: /root/autodl-tmp/AGE-YOLO-main/dataset/NEU-DET/validation/images

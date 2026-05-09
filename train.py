@@ -5,8 +5,8 @@ warnings.filterwarnings('ignore')
 
 # ===================== Configuration =====================
 MODEL_CONFIG = 'ultralytics/cfg/models/age_yolo.yaml'
-DATA_CONFIG = 'dataset/gc10_data.yaml'
-PROJECT_DIR = 'runs/AGE-YOLO-GC10'
+DATA_CONFIG = 'dataset/NEU-DET/steel_defect.yaml'
+PROJECT_DIR = 'runs/AGE-YOLO-NEU'
 EXPERIMENT_NAME = 'Official-Release'
 # =========================================================
 

@@ -2,7 +2,7 @@ from ultralytics import YOLO
 
 if __name__ == '__main__':
     # Load trained AGE-YOLO weights
-    model = YOLO('weights/age_yolo_gc10.pt')
+    model = YOLO('weights/pretrained_neu.pt')
 
     # Run inference on sample images
     model.predict(

@@ -2,11 +2,11 @@ from ultralytics import YOLO
 
 if __name__ == '__main__':
     # Load trained AGE-YOLO weights
-    model = YOLO('weights/pretrained_gc10.pt')
+    model = YOLO('weights/pretrained_neu.pt')
 
     # Evaluate on the test split defined in dataset/gc10.yaml
     metrics = model.val(
-        data='dataset/gc10.yaml',
+        data='dataset/NEU-DET/steel_defect.yaml',
         split='test',
         imgsz=640,
         device=0

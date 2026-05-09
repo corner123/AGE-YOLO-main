@@ -2,7 +2,7 @@
 # Model configuration for industrial defect detection
 
 # Parameters
-nc: 10 # 类别数
+nc: 6 # NEU-DET 类别数
 scales:
   n: [0.50, 0.25, 1024]
 
