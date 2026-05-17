@@ -141,7 +141,7 @@ class VarifocalLoss_YOLO(nn.Module):
         """Computes varfocal loss."""
         
         weight = self.alpha * (pred_score.sigmoid() - gt_score).abs().pow(self.gamma) * (gt_score <= 0.0).float() + gt_score * (gt_score > 0.0).float()
-        with torch.cuda.amp.autocast(enabled=False):
+        with torch.amp.autocast('cuda', enabled=False):
             return F.binary_cross_entropy_with_logits(pred_score.float(), gt_score.float(), reduction='none') * weight
 
 class QualityfocalLoss_YOLO(nn.Module):
@@ -154,11 +154,11 @@ class QualityfocalLoss_YOLO(nn.Module):
         pred_sigmoid = pred_score.sigmoid()
         scale_factor = pred_sigmoid
         zerolabel = scale_factor.new_zeros(pred_score.shape)
-        with torch.cuda.amp.autocast(enabled=False):
+        with torch.amp.autocast('cuda', enabled=False):
             loss = F.binary_cross_entropy_with_logits(pred_score, zerolabel, reduction='none') * scale_factor.pow(self.beta)
         
         scale_factor = gt_score[gt_target_pos_mask] - pred_sigmoid[gt_target_pos_mask]
-        with torch.cuda.amp.autocast(enabled=False):
+        with torch.amp.autocast('cuda', enabled=False):
             loss[gt_target_pos_mask] = F.binary_cross_entropy_with_logits(pred_score[gt_target_pos_mask], gt_score[gt_target_pos_mask], reduction='none') * scale_factor.abs().pow(self.beta)
         return loss
 

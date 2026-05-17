@@ -94,7 +94,7 @@ class ReverseFunction(torch.autograd.Function):
 
         with torch.enable_grad(), \
             torch.random.fork_rng(devices=ctx.gpu_devices, enabled=ctx.preserve_rng_state), \
-            torch.cuda.amp.autocast(**ctx.gpu_autocast_kwargs), \
+            torch.amp.autocast('cuda', **ctx.gpu_autocast_kwargs), \
             torch.cpu.amp.autocast(**ctx.cpu_autocast_kwargs):
             
             g3_up = g3_right

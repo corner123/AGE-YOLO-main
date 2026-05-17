@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from torch.cuda.amp import autocast
+from torch.amp import autocast
 try:
     from mamba_ssm import Mamba
 except:
@@ -136,7 +136,7 @@ class MambaLayer(nn.Module):
         )
         
     
-    @autocast(enabled=False)
+    @autocast('cuda', enabled=False)
     def forward(self, x, pe, mask):
         x_dtype = x.dtype
         if x.dtype == torch.float16:
