@@ -1,10 +1,11 @@
 import warnings
-from ultralytics import YOLO
-
 warnings.filterwarnings('ignore')
 
+from ultralytics import YOLO
+
 # ===================== Configuration =====================
-MODEL_CONFIG = 'ultralytics/cfg/models/age_yolo.yaml'
+# Paper: Table 2 hyperparameters + Section 4.2 augmentation
+MODEL_CONFIG = 'cfg/models/age_yolo.yaml'
 DATA_CONFIG = 'dataset/NEU-DET/steel_defect.yaml'
 PROJECT_DIR = 'runs/AGE-YOLO-NEU'
 EXPERIMENT_NAME = 'Official-Release'
@@ -15,21 +16,22 @@ def main():
 
     model.train(
         data=DATA_CONFIG,
-        epochs=300,
-        batch=16,
-        imgsz=640,
-        optimizer='SGD',
-        lr0=0.01,
-        patience=50,
+        epochs=300,           # Table 2: Maximum epochs
+        batch=16,             # Table 2: Batch size
+        imgsz=640,            # Table 2: Image resolution
+        optimizer='SGD',      # Table 2: Optimizer
+        lr0=0.01,             # Table 2: Initial learning rate
+        patience=50,          # Table 2: Early stopping patience
 
-        # Mild online augmentation (offline augmentation already applied)
+        # Mild online augmentation (offline x5 already applied)
+        # Paper Section 4.2: offline aug does flip/scale/HSV; online only keeps mosaic
         mosaic=1.0,
-        fliplr=0.0,
+        fliplr=0.0,           # Offline already did horizontal flip
         flipud=0.0,
-        scale=0.1,
+        scale=0.1,            # Mild jitter only, offline did [0.8,1.2]
         hsv_h=0.01,
-        hsv_s=0.2,
-        hsv_v=0.2,
+        hsv_s=0.2,            # Match offline HSV jitter factor
+        hsv_v=0.2,            # Match offline HSV jitter factor
 
         pretrained=False,
         project=PROJECT_DIR,
