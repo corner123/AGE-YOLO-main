@@ -1,5 +1,5 @@
 # Dataset root directory
-path: dataset/processed/GC10
+path: D:/wupengju/Code/workspace_acdemic/AGE-YOLO-main/dataset/GC10
 
 # Relative image paths
 train: images/train

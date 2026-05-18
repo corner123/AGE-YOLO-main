@@ -69,7 +69,7 @@ def split_dataset(image_dir, label_dir, output_dir, ratio=(0.8, 0.1, 0.1), seed=
 
 if __name__ == "__main__":
     split_dataset(
-        image_dir='./dataset/raw/GC10-DET/images',
-        label_dir='./dataset/raw/GC10-DET/labels',
-        output_dir='./dataset/processed/GC10'
+        image_dir='D:/wupengju/Code/workspace_acdemic/AGE-YOLO-main/dataset/GC10-DET/image',
+        label_dir='D:/wupengju/Code/workspace_acdemic/AGE-YOLO-main/dataset/GC10-DET/labels',
+        output_dir='D:/wupengju/Code/workspace_acdemic/AGE-YOLO-main/dataset/GC10'
     )

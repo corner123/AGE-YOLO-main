@@ -2,9 +2,24 @@ import os
 import xml.etree.ElementTree as ET
 from tqdm import tqdm
 
-# Class mapping for specific datasets
-# GC10-DET: ['ph', 'wl', 'cg', 'ws', 'os', 'ss', 'in', 'rp', 'cr', 'wf']
-CLASSES = ['ph', 'wl', 'cg', 'ws', 'os', 'ss', 'in', 'rp', 'cr', 'wf']
+# GC10-DET class mapping: XML annotation name -> class ID
+# Paper Section 4.2: 10 defect categories
+XML_NAME_TO_ID = {
+    '1_chongkong': 0,    # punching_hole (ph)
+    '2_hanfeng': 1,      # weld_line (wl)
+    '3_yueyawan': 2,     # crescent_gap (cg)
+    '4_shuiban': 3,      # water_spot (ws)
+    '5_youban': 4,       # oil_spot (os)
+    '6_siban': 5,        # silk_spot (ss)
+    '7_yiwu': 6,         # inclusion (in)
+    '8_yahen': 7,        # rolled_pit (rp)
+    '9_zhehen': 8,       # crease (cr)
+    '10_yaozhe': 9,      # waist_folding (wf)
+    '10_yaozhed': 9,     # waist_folding (wf) - typo variant
+}
+
+CLASSES = ['punching_hole', 'weld_line', 'crescent_gap', 'water_spot', 'oil_spot',
+           'silk_spot', 'inclusion', 'rolled_pit', 'crease', 'waist_folding']
 
 
 def convert_box(size, box):
@@ -35,10 +50,10 @@ def convert_xml_to_yolo(xml_dir, save_dir):
         txt_name = xml_file.replace('.xml', '.txt')
         with open(os.path.join(save_dir, txt_name), 'w') as out_file:
             for obj in root.iter('object'):
-                cls = obj.find('name').text.lower()
-                if cls not in CLASSES:
+                cls = obj.find('name').text.lower().strip()
+                if cls not in XML_NAME_TO_ID:
                     continue
-                cls_id = CLASSES.index(cls)
+                cls_id = XML_NAME_TO_ID[cls]
                 xmlbox = obj.find('bndbox')
                 b = (float(xmlbox.find('xmin').text), float(xmlbox.find('xmax').text),
                      float(xmlbox.find('ymin').text), float(xmlbox.find('ymax').text))
@@ -48,6 +63,6 @@ def convert_xml_to_yolo(xml_dir, save_dir):
 
 if __name__ == "__main__":
     convert_xml_to_yolo(
-        xml_dir='./dataset/raw/GC10-DET/xmls',
-        save_dir='./dataset/raw/GC10-DET/labels'
+        xml_dir='D:/wupengju/Code/workspace_acdemic/AGE-YOLO-main/dataset/GC10-DET/lable',
+        save_dir='D:/wupengju/Code/workspace_acdemic/AGE-YOLO-main/dataset/GC10-DET/labels'
     )

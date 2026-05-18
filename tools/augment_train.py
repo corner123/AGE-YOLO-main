@@ -78,7 +78,7 @@ def run_augment(yaml_path, multiplier):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--yaml', type=str, default='dataset/data.yaml')
+    parser.add_argument('--yaml', type=str, default='dataset/gc10_data.yaml')
     parser.add_argument('--mult', type=int, default=4)
     args = parser.parse_args()
 
