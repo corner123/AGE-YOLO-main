@@ -5,11 +5,10 @@ warnings.filterwarnings("ignore")
 
 from ultralytics import YOLO
 
-# Paper protocol: GC10-DET primary benchmark, Table 2 + Section 4.2.
-MODEL_CONFIG = "cfg/models/age_yolo_gc10.yaml"
+MODEL_CONFIG = "ultralytics/cfg/models/yolo11n.yaml"
 DATA_CONFIG = "dataset/gc10_data.yaml"
-PROJECT_DIR = "runs/AGE-YOLO-GC10"
-EXPERIMENT_NAME = "Official-Release"
+PROJECT_DIR = "runs/YOLOv11n-GC10"
+EXPERIMENT_NAME = "baseline"
 PAPER_SEEDS = (42, 2025, 1024, 666, 777)
 
 
@@ -48,7 +47,7 @@ def train_one(seed=42, name=None, workers=4, device=0):
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="Train AGE-YOLO on GC10-DET with the paper protocol.")
+    parser = argparse.ArgumentParser(description="Train YOLOv11n baseline on GC10-DET with the paper protocol.")
     parser.add_argument("--seed", type=int, default=42, help="Single-run seed. Ignored when --all-seeds is set.")
     parser.add_argument("--all-seeds", action="store_true", help="Run the five seeds reported in the paper.")
     parser.add_argument("--name", default=EXPERIMENT_NAME, help="Run name for a single seed.")
